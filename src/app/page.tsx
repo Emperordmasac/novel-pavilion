@@ -1,3 +1,5 @@
+import Container from "@/components/container";
+import Hero from "@/components/hero";
 import HomeNav from "@/components/home-nav";
 
 const Home = () => {
@@ -5,6 +7,11 @@ const Home = () => {
     <div>
       <header>
         <HomeNav />
+        <Container>
+          <div className="pt-[36px]">
+            <Hero />
+          </div>
+        </Container>
       </header>
     </div>
   );

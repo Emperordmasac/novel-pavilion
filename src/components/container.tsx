@@ -13,20 +13,3 @@ const Container: FC<container> = ({ children }) => {
 };
 
 export default Container;
-
-// import React from "react";
-// import { Box } from "@chakra-ui/react";
-
-// const Container = ({ children, ...styles }) => (
-//   <Box
-//     maxWidth="1280px"
-//     marginX="auto"
-//     width="100%"
-//     {...styles}
-//     paddingX="40px"
-//   >
-//     {children}
-//   </Box>
-// );
-
-// export default Container;

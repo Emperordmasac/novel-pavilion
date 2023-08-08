@@ -1,26 +1,15 @@
-import React, { FC } from "react";
-import { Box, Heading } from "@chakra-ui/react";
+import AdBoard from "./ad-board";
 
-const Hero: FC<{ content: { title: string; body: string } }> = ({
-  content,
-}) => {
+const Hero = () => {
   return (
-    <Box width="100%" display="flex" alignItems="center">
-      <Box>
-        <Heading
-          fontSize="clamp(2rem, 8vw, 6rem)"
-          lineHeight="clamp(2rem, 8vw, 6rem)"
-        >
-          {content.title}
-        </Heading>
-        <Box
-          fontSize="clamp(1.2rem, 4vw, 1.5rem)"
-          lineHeight="clamp(1.2rem, 4vw, 2rem)"
-        >
-          {content.body}
-        </Box>
-      </Box>
-    </Box>
+    <div className="flex flex-row w-[100%]">
+      {/* ad board --left */}
+      <div className="w-[61.66%]">
+        <AdBoard />
+      </div>
+      {/* announcement board --right */}
+      <div></div>
+    </div>
   );
 };
 
