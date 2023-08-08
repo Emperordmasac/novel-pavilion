@@ -10,16 +10,16 @@ const HomeNav = () => {
     { name: "Resources", link: "/resources" },
   ];
   return (
-    <nav className="text-[#fff] bg-[#131415]">
+    <nav className="text-[#fff] bg-[#131415] ">
       <div className="w-[100vw] py-10">
         <Container>
-          <div className="flex content-center items-center h-[100%]">
+          <div className="flex content-center items-center h-[100%] justify-between d_k2:justify-start">
             <Logo />
-            <div className="flex  gap-[30px] d_k2:hidden">
+            <div className="flex justify-end items-end gap-[30px] d_k2:hidden">
               <FaUser size={20} />
               <FaBars size={20} />
             </div>
-            <div className="content-center justify-between ml-[40px] hidden d_k2:flex">
+            <div className="content-center ml-[40px] hidden d_k2:flex">
               {links && links.length > 0
                 ? links.map((link) => (
                     <Link
