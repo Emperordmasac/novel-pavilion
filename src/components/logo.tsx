@@ -1,13 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { Text } from "evergreen-ui";
 
-const Logo = ({ ...styles }) => {
+const Logo = () => {
   return (
     <Link href="/">
-      <Text fontSize="30px" color="#000" {...styles}>
+      <p className="flex text-[20px] text-[#fff]">
         <strong>Novel Pavilion</strong>
-      </Text>
+      </p>
     </Link>
   );
 };
