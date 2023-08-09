@@ -9,28 +9,34 @@ const HomeNav = () => {
     { name: "Bookmarks", link: "/bookmark" },
     { name: "Resources", link: "/resources" },
   ];
+
   return (
-    <nav className="text-[#fff] bg-[#131415] ">
-      <div className="w-[100vw] py-10">
+    <nav className="text-[#fff] bg-gray-800 ">
+      <div className="w-[100vw] py-[20px]">
         <Container>
-          <div className="flex content-center items-center h-[100%] justify-between d_k2:justify-start">
-            <Logo />
-            <div className="flex justify-end items-end gap-[30px] d_k2:hidden">
+          <div className="flex items-center justify-between">
+            <div className="flex content-center items-center h-[100%] justify-between d_k2:justify-start">
+              <Logo />
+              <div className="content-center ml-[40px] hidden d_k2:flex">
+                {links && links.length > 0
+                  ? links.map((link) => (
+                      <Link
+                        href={`${link.link}`}
+                        key={link.name}
+                        className="px-[10px]"
+                      >
+                        <p className="text-[16px]  text-bold">{link.name}</p>
+                      </Link>
+                    ))
+                  : null}
+              </div>
+            </div>
+            <div className="content-center ml-[40px] hidden d_k2:flex cursor-pointer">
+              <FaUser size={20} />
+            </div>
+            <div className="flex justify-end items-end gap-[30px] d_k2:hidden cursor-pointer">
               <FaUser size={20} />
               <FaBars size={20} />
-            </div>
-            <div className="content-center ml-[40px] hidden d_k2:flex">
-              {links && links.length > 0
-                ? links.map((link) => (
-                    <Link
-                      href={`${link.link}`}
-                      key={link.name}
-                      className="px-[10px]"
-                    >
-                      <p className="text-[16px]  text-bold">{link.name}</p>
-                    </Link>
-                  ))
-                : null}
             </div>
           </div>
         </Container>
@@ -41,8 +47,6 @@ const HomeNav = () => {
 
 export default HomeNav;
 
-// import React, { FC } from "react";
-// import NextLink from "next/link";
 // import Container from "./container";
 // import Logo from "./logo";
 // import User from "./user";

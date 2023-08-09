@@ -5,7 +5,9 @@ const Logo = () => {
   return (
     <Link href="/">
       <p className="flex text-[20px] text-[#fff]">
-        <strong>Novel Pavilion</strong>
+        <strong>
+          <span className="s_m1:hidden">Novel</span> Pavilion
+        </strong>
       </p>
     </Link>
   );
