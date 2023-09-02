@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 import { marketingConfig } from "@/config/marketing";
-
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 import { MainNav } from "@/components/main-nav";
 import { SiteFooter } from "@/components/site-footer";
-import { Icons } from "@/components/icons";
 
 interface MarketingLayoutProps {
   children: React.ReactNode;
@@ -13,14 +13,23 @@ interface MarketingLayoutProps {
 export default async function MarketingLayout({
   children,
 }: MarketingLayoutProps) {
-  const user = false;
-
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="container sticky top-0 z-40 bg-white">
-        <div className="flex items-center justify-between h-16 py-4 border-b border-b-slate-200">
+      <header className="container z-40 bg-background">
+        <div className="flex h-20 items-center justify-between py-6">
           <MainNav items={marketingConfig.mainNav} />
-          {user ? (
+          <nav>
+            <Link
+              href="/login"
+              className={cn(
+                buttonVariants({ variant: "secondary", size: "sm" }),
+                "px-4"
+              )}
+            >
+              Login
+            </Link>
+          </nav>
+          {/* {user ? (
             <Icons.user />
           ) : (
             <nav>
@@ -31,7 +40,7 @@ export default async function MarketingLayout({
                 Login
               </Link>
             </nav>
-          )}
+          )} */}
         </div>
       </header>
       <main className="flex-1">{children}</main>
