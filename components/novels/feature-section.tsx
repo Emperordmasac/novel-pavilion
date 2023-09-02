@@ -15,14 +15,14 @@ export default function FeatureSection({ title, albums }: FeatureSectionProps) {
           {title}
         </h2>
       </div>
-      <div className="grid justify-center gap-4 sm:grid-cols-2 md:grid-cols-4">
+      <div className="grid justify-center lg:gap-x-4 gap-x-40 gap-y-10 sm:grid-cols-2 md:grid-cols-4">
         {albums?.slice(0, 4).map((album) => (
           <NovelGrid
             key={album.name}
             album={album}
             className="w-[250px]"
             aspectRatio="portrait"
-            width={250}
+            width={200}
             height={330}
           />
         ))}

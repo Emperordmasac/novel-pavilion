@@ -19,7 +19,7 @@ import { Icons } from "@/components/icons";
 export default function IndexPage() {
   return (
     <>
-      <section className="container pt-6 pb-8 md:pb-12 md:pt-10 lg:pb-24 lg:pt-16">
+      {/* <section className="container pt-6 pb-8 md:pb-12 md:pt-10 lg:pb-24 lg:pt-16">
         <div className="flex w-full flex-col lg:flex-row lg:space-x-[40px]">
           <div className="lg:w-[61.66%] md:mb-[20px]">
             <div className="h-[320px] w-full bg-gray-400 flex flex-shrink-0 text-[#000] rounded-[12px]"></div>
@@ -41,7 +41,7 @@ export default function IndexPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       <hr className="border-slate-200" />
       <section className="container grid justify-center gap-6 py-2 md:py-12 lg:py-19">
         <FeatureSection title="Popular This Week" albums={listenNowAlbums} />
