@@ -1,28 +1,17 @@
 import Link from "next/link";
-import Image from "next/image";
-import hero from "../../public/images/hero.png";
 import { siteConfig } from "@/config/site";
 
 import FeatureSection from "@/components/novels/feature-section";
-import { listenNowAlbums, madeForYouAlbums } from "@/config/data/albums";
 import NovelTable from "@/components/novels/novel-table";
-import {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
-import { Icons } from "@/components/icons";
+import { newNovels, oldNovels } from "@/config/data/novels";
 
 export default function IndexPage() {
   return (
     <>
       <section className="container grid justify-center gap-6 py-2 md:py-12 lg:py-19">
-        <FeatureSection title="Popular This Week" albums={listenNowAlbums} />
-        <FeatureSection title="New Releases" albums={madeForYouAlbums} />
-        <FeatureSection title="Poplular genres" albums={listenNowAlbums} />
+        <FeatureSection title="Popular This Week" novels={newNovels} />
+        <FeatureSection title="New Releases" novels={oldNovels} />
+        <FeatureSection title="Poplular genres" novels={newNovels} />
         <h2 className="text-3xl font-bold leading-[1.1] tracking-tighter sm:text-3xl md:text-5xl">
           Most Recent Update
         </h2>

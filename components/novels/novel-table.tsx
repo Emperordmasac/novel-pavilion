@@ -1,9 +1,9 @@
-import { Album, newNovels, oldNovels } from "@/config/data/novels";
+import { Novel, newNovels, oldNovels } from "@/config/data/novels";
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
 interface NovelTableProps extends React.HTMLAttributes<HTMLDivElement> {
-  album: Album;
+  novel: Novel;
 }
 
 export default function NovelTable() {
@@ -21,7 +21,7 @@ export default function NovelTable() {
             ))
           : null}
         {oldNovels
-          ? newNovels.map((novel, i) => (
+          ? oldNovels.map((novel, i) => (
               <TableRow key={`${i} + 1`}>
                 <TableCell className="font-medium">{novel.title}</TableCell>
                 <TableCell>{novel.chapter}</TableCell>

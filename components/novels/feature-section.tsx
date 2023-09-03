@@ -1,13 +1,12 @@
 import { NovelGrid } from "@/components/novels/novel-grid";
-
-import { Album } from "@/config/data/albums";
+import { Novel } from "@/config/data/novels";
 
 interface FeatureSectionProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
-  albums: Album[];
+  novels: Novel[];
 }
 
-export default function FeatureSection({ title, albums }: FeatureSectionProps) {
+export default function FeatureSection({ title, novels }: FeatureSectionProps) {
   return (
     <section className="container grid justify-center gap-6 py-8 md:py-3 lg:py-6">
       <div className="flex flex-col gap-4 my-2">
@@ -16,10 +15,10 @@ export default function FeatureSection({ title, albums }: FeatureSectionProps) {
         </h2>
       </div>
       <div className="grid justify-center lg:gap-x-4 gap-x-40 gap-y-10 sm:grid-cols-2 md:grid-cols-4">
-        {albums?.slice(0, 4).map((album) => (
+        {novels?.slice(0, 4).map((novel) => (
           <NovelGrid
-            key={album.name}
-            album={album}
+            key={novel.title}
+            novel={novel}
             className="w-[250px]"
             aspectRatio="portrait"
             width={200}
