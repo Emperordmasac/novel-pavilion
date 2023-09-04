@@ -32,6 +32,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".contentlayer/generated"
-, "app/(marketing)/[...slug]"  ],
+, "app/(marketing)/[slug]"  ],
   "exclude": ["node_modules"]
 }

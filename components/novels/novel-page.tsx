@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
-import { Novel } from "@/config/data/novels";
+import { Novel, Chapter } from "@/config/data/novels";
 import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -69,9 +69,12 @@ export function NovelPage({ novel }: NovelPageProps) {
           ) : null}
 
           <div className="mt-20">
-            <button type="submit" className={cn(buttonVariants())}>
+            <Link href={`/${novel.href}/1`} className={cn(buttonVariants())}>
               Start Reading
-            </button>
+            </Link>
+            {/* <button type="submit" className={cn(buttonVariants())}>
+            Start Reading
+            </button> */}
           </div>
         </div>
       </div>
