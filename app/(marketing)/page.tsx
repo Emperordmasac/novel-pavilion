@@ -1,14 +1,25 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 
-import FeatureSection from "@/components/novels/feature-section";
+import FeatureSection, { Novel } from "@/components/novels/feature-section";
 import NovelTable from "@/components/novels/novel-table";
 import { newNovels, oldNovels } from "@/config/data/novels";
 
-export default function IndexPage() {
+import { SanityDocument } from "next-sanity";
+import { sanityFetch } from "@/sanity/lib/sanityFetch";
+import { novelsQuery } from "@/sanity/lib/queries";
+
+export default async function IndexPage() {
+  const novelSanity = await sanityFetch<SanityDocument[]>({
+    query: novelsQuery,
+  });
+
+  console.log("homepage-->", novelSanity);
+
   return (
     <>
       <section className="container grid justify-center gap-6 py-2 md:py-12 lg:py-19">
+        <Novel novels={novelSanity} />
         <FeatureSection title="Popular This Week" novels={newNovels} />
         <FeatureSection title="New Releases" novels={oldNovels} />
         <FeatureSection title="Poplular genres" novels={newNovels} />

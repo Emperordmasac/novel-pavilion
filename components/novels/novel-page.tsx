@@ -6,13 +6,18 @@ import { Novel, Chapter } from "@/config/data/novels";
 import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import NovelTable from "@/components/novels/novel-table";
+import NovelTable, { ChapterTable } from "@/components/novels/novel-table";
+
+import imageUrlBuilder from "@sanity/image-url";
+import { client } from "@/sanity/lib/client";
+
+const builder = imageUrlBuilder(client);
 
 interface NovelPageProps extends React.HTMLAttributes<HTMLDivElement> {
   novel: Novel;
 }
 
-export function NovelPage({ novel }: NovelPageProps) {
+export function NovelPage({ novel, chapters }) {
   return (
     <article className="container relative max-w-3xl py-6 lg:py-10">
       <Link
@@ -26,9 +31,9 @@ export function NovelPage({ novel }: NovelPageProps) {
         Back Home
       </Link>
       <div className="flex flex-col gap-10 md:flex-row">
-        {novel && novel.cover && (
+        {novel && novel.mainImage && (
           <Image
-            src={novel.cover}
+            src={builder.image(novel.mainImage).width(200).height(330).url()}
             alt={novel.title}
             width={308}
             height={412}
@@ -39,10 +44,10 @@ export function NovelPage({ novel }: NovelPageProps) {
         <div className="mt-0 md:mt-10">
           {novel && novel.time && (
             <time
-              dateTime={novel.time}
+              dateTime={novel.publishedAt}
               className="block text-sm text-muted-foreground"
             >
-              Published {novel.time}
+              Published {novel.publishedAt}
             </time>
           )}
           <h1 className="mt-2 inline-block font-heading text-4xl leading-tight lg:text-5xl">
@@ -69,7 +74,7 @@ export function NovelPage({ novel }: NovelPageProps) {
           ) : null}
 
           <div className="mt-20">
-            <Link href={`/${novel.href}/1`} className={cn(buttonVariants())}>
+            <Link href="" className={cn(buttonVariants())}>
               Start Reading
             </Link>
             {/* <button type="submit" className={cn(buttonVariants())}>
@@ -90,7 +95,8 @@ export function NovelPage({ novel }: NovelPageProps) {
             world-class scientists.
           </TabsContent>
           <TabsContent value="chapters">
-            <NovelTable />
+            {/* <NovelTable /> */}
+            <ChapterTable chapters={chapters} />
           </TabsContent>
         </Tabs>
       </div>

@@ -55,34 +55,67 @@ import { notFound } from "next/navigation";
 import { newNovels, oldNovels } from "@/config/data/novels";
 import { NovelPage } from "@/components/novels/novel-page";
 
+import { SanityDocument } from "@sanity/client";
+import {
+  novelPathsQuery,
+  novelQuery,
+  chaptersQuery,
+} from "@/sanity/lib/queries";
+import { sanityFetch } from "@/sanity/lib/sanityFetch";
+import { client } from "@/sanity/lib/client";
+
 interface PageProps {
   params: {
     slug: string;
   };
 }
 
-export async function generateStaticParams(): Promise<PageProps["params"][]> {
-  const allNovels = [...newNovels, ...oldNovels];
+// export async function generateStaticParams(): Promise<PageProps["params"][]> {
+//   const allNovels = [...newNovels, ...oldNovels];
 
-  const paramsArray = allNovels.map((novel) => ({
-    slug: novel.href.substring(1), // Remove the leading '/'
-  }));
+//   const paramsArray = allNovels.map((novel) => ({
+//     slug: novel.href.substring(1), // Remove the leading '/'
+//   }));
 
-  return paramsArray;
+//   return paramsArray;
+// }
+
+// Prepare Next.js to know which routes already exist
+export async function generateStaticParams() {
+  // Important, use the plain Sanity Client here
+  const novels = await client.fetch(novelPathsQuery);
+
+  return novels;
 }
 
-export default async function PagePage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const novel =
-    newNovels.find((novel) => novel.href === `${params.slug}`) ||
-    oldNovels.find((novel) => novel.href === `${params.slug}`);
+export default async function Page({ params }: { params: any }) {
+  const novel = await sanityFetch<SanityDocument>({
+    query: novelQuery,
+    params,
+  });
 
-  if (!novel) {
-    notFound();
-  }
+  const chapters = await sanityFetch<SanityDocument>({
+    query: chaptersQuery,
+    params,
+  });
 
-  return <NovelPage novel={novel} />;
+  console.log("novel page->", novel);
+
+  return <NovelPage novel={novel} chapters={chapters} />;
 }
+
+// export default async function PagePage({
+//   params,
+// }: {
+//   params: { slug: string };
+// }) {
+//   const novel =
+//     newNovels.find((novel) => novel.href === `${params.slug}`) ||
+//     oldNovels.find((novel) => novel.href === `${params.slug}`);
+
+//   if (!novel) {
+//     notFound();
+//   }
+
+//   return <NovelPage novel={novel} />;
+// }

@@ -25,12 +25,12 @@ export function ReadingPage({ novel }: NovelPageProps) {
       <div>
         {novel && (
           <>
-            <time
+            {/* <time
               dateTime={novel.date}
               className="block text-sm text-muted-foreground"
             >
               Published {novel.date}
-            </time>
+            </time> */}
             <h1 className="mt-2 inline-block font-heading text-4xl leading-tight lg:text-5xl">
               {novel.title}
             </h1>
