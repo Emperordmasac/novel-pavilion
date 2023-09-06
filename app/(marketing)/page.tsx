@@ -1,17 +1,24 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 
-import FeatureSection from "@/components/novels/feature-section";
+import FeatureSection, {
+  ContentFulSection,
+} from "@/components/novels/feature-section";
 import NovelTable from "@/components/novels/novel-table";
 import { newNovels, oldNovels } from "@/config/data/novels";
 
-export default function IndexPage() {
+import { client } from "@/lib/contentful/client";
+
+export default async function IndexPage() {
+  const data = await await client.getEntries({ content_type: "novel" });
+
   return (
     <>
       <section className="container grid justify-center gap-6 py-2 md:py-12 lg:py-19">
-        <FeatureSection title="Popular This Week" novels={newNovels} />
+        <ContentFulSection bigTitle="ContentFul Data" novels={data.items} />
+        {/* <FeatureSection title="Popular This Week" novels={newNovels} />
         <FeatureSection title="New Releases" novels={oldNovels} />
-        <FeatureSection title="Poplular genres" novels={newNovels} />
+        <FeatureSection title="Poplular genres" novels={newNovels} /> */}
         <h2 className="text-3xl font-bold leading-[1.1] tracking-tighter sm:text-3xl md:text-5xl">
           Most Recent Update
         </h2>
