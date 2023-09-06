@@ -40,7 +40,7 @@ export const chapterssQuery = groq`*[_type == 'novel' && slug.current == $slug][
 }`
 
 // Get a single chapter by its slug
-export const singleChapterQuery = groq`*[_type == 'novel-gpt' && slug.current == $slug][0].chapters[slug.current == $parentSlug][0]
+export const singleChapterQuery = groq`*[_type == 'novel' && slug.current == $parentSlug][0].chapters[slug.current == $slug][0]
 `
 
 // Get all chapters slugs

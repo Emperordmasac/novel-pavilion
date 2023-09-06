@@ -103,7 +103,7 @@ export default async function Page({ params }: { params: any }) {
     },
   });
 
-  console.log("chapters of a novel->", chapters);
+  console.log("chapters of a novel->", novel.chapters);
 
   return <NovelPage novel={novel} chapters={chapters} />;
 }

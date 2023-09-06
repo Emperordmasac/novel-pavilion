@@ -1,7 +1,6 @@
 // schemas/novel.js
 
 import { defineType, defineField } from 'sanity'
-import { slugWithType } from '../lib/slugifier'
 
 export default defineType({
   name: 'novel',
@@ -81,8 +80,8 @@ export default defineType({
                   // Generate the slug based on the novel title and chapter title
                   const novelTitle = parent?.title || 'unknown-novel-title'
                   const chapterTitle = document.title || 'unknown-chapter-title'
-                  // return `${chapterTitle}/${novelTitle}`
-                  slugWithType(`${chapterTitle}`, `${novelTitle}`)
+                  console.log('novel tite -->', novelTitle)
+                  return `${novelTitle}`
                 },
                 maxLength: 200,
               },

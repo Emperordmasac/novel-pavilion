@@ -36,7 +36,9 @@ export default function NovelTable() {
   );
 }
 
-export function ChapterTable({ chapters }) {
+export function ChapterTable({ chapters, novelSlug }) {
+  // novel-title/chapter1
+  console.log("novelSlug->", chapters);
   return (
     <Table>
       <TableBody>
@@ -44,7 +46,9 @@ export function ChapterTable({ chapters }) {
           ? chapters.map((chapter, i) => (
               <TableRow key={`${i} + 1`}>
                 <TableCell className="font-medium">
-                  <Link href={chapter.slug.current}> {chapter.title}</Link>
+                  <Link href={`${novelSlug}/${chapter.slug.current}`}>
+                    {chapter.title}
+                  </Link>
                 </TableCell>
               </TableRow>
             ))

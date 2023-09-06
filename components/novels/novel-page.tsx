@@ -96,7 +96,7 @@ export function NovelPage({ novel, chapters }) {
           </TabsContent>
           <TabsContent value="chapters">
             {/* <NovelTable /> */}
-            <ChapterTable chapters={chapters} />
+            <ChapterTable novelSlug={novel.slug.current} chapters={chapters} />
           </TabsContent>
         </Tabs>
       </div>

@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, usePathname } from "next/navigation";
 
 import { newNovels, oldNovels } from "@/config/data/novels";
 import { ReadingPage } from "@/components/novels/reading-page";
@@ -57,11 +57,12 @@ export async function generateStaticParams() {
 // }
 
 export default async function Page({ params }: { params: any }) {
+  console.log("params-->", params);
   const novel = await sanityFetch<SanityDocument>({
     query: singleChapterQuery,
     params: {
-      slug: "history-strongest-senior-brother-chapter-1",
-      parentSlug: "history-strongest-senior-brother",
+      slug: params.chapter,
+      parentSlug: params.slug,
     },
   });
 
