@@ -1,10 +1,14 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
+// schemas/novel.js
+
+import { defineType, defineField } from 'sanity'
+import { slugWithType } from '../lib/slugifier'
 
 export default defineType({
   name: 'novel',
   title: 'Novel',
   type: 'document',
   fields: [
+    // ... other fields
     defineField({
       name: 'title',
       title: 'Title',
@@ -39,16 +43,55 @@ export default defineType({
         },
       ],
     }),
-    defineField({
+    {
       name: 'chapters',
       title: 'Chapters',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'chapter' } }],
-    }),
-    defineField({
-      name: 'publishedAt',
-      title: 'Published at',
-      type: 'datetime',
-    }),
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+            },
+            {
+              name: 'date',
+              title: 'Date',
+              type: 'date',
+            },
+            {
+              name: 'description',
+              title: 'Description',
+              type: 'string',
+            },
+            {
+              name: 'content',
+              title: 'Content',
+              type: 'text',
+            },
+            // Add a computed slug field for chapters
+            {
+              name: 'slug',
+              title: 'Slug',
+              type: 'slug',
+              options: {
+                source: (document, { parent }) => {
+                  // Generate the slug based on the novel title and chapter title
+                  const novelTitle = parent?.title || 'unknown-novel-title'
+                  const chapterTitle = document.title || 'unknown-chapter-title'
+                  // return `${chapterTitle}/${novelTitle}`
+                  slugWithType(`${chapterTitle}`, `${novelTitle}`)
+                },
+                maxLength: 200,
+              },
+            },
+          ],
+          // ... other field configurations for chapters
+        },
+      ],
+    },
   ],
+  // ... other configurations for the novel schema
 })

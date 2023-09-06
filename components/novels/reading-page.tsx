@@ -9,7 +9,7 @@ interface NovelPageProps extends React.HTMLAttributes<HTMLDivElement> {
   novel: Chapter;
 }
 
-export function ReadingPage({ novel }: NovelPageProps) {
+export function ReadingPage({ novel }) {
   return (
     <article className="container relative max-w-3xl py-6 lg:py-10">
       <Link

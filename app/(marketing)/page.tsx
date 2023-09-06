@@ -14,7 +14,7 @@ export default async function IndexPage() {
     query: novelsQuery,
   });
 
-  console.log("homepage-->", novelSanity);
+  console.log("all novels-->", novelSanity);
 
   return (
     <>

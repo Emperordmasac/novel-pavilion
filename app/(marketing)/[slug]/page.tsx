@@ -59,7 +59,7 @@ import { SanityDocument } from "@sanity/client";
 import {
   novelPathsQuery,
   novelQuery,
-  chaptersQuery,
+  chapterssQuery,
 } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/sanityFetch";
 import { client } from "@/sanity/lib/client";
@@ -84,7 +84,7 @@ interface PageProps {
 export async function generateStaticParams() {
   // Important, use the plain Sanity Client here
   const novels = await client.fetch(novelPathsQuery);
-
+  console.log("all novel paths -->", novels);
   return novels;
 }
 
@@ -94,12 +94,16 @@ export default async function Page({ params }: { params: any }) {
     params,
   });
 
+  // console.log("single novel->", novel.slug.current);
+
   const chapters = await sanityFetch<SanityDocument>({
-    query: chaptersQuery,
-    params,
+    query: chapterssQuery,
+    params: {
+      slug: novel?.slug.current,
+    },
   });
 
-  console.log("novel page->", novel);
+  console.log("chapters of a novel->", chapters);
 
   return <NovelPage novel={novel} chapters={chapters} />;
 }

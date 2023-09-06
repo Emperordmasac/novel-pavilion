@@ -24,13 +24,30 @@ export const novelsQuery = groq`*[_type == "novel" && defined(slug.current)]{
 
 // Get a single novel by its slug
 export const novelQuery = groq`*[_type == "novel" && slug.current == $slug][0]{ 
-  title, mainImage, author, publishedAt, chapters
+  title, mainImage, author, publishedAt, chapters, slug
 }`
 
 // Get all novel slugs
 export const novelPathsQuery = groq`*[_type == "novel" && defined(slug.current)][]{
   "params": { "slug": slug.current }
 }`
+
+/////////////
+
+// Get all chapters belonging to a particular novel
+export const chapterssQuery = groq`*[_type == 'novel' && slug.current == $slug][0].chapters[]{
+  _id, title, slug, description
+}`
+
+// Get a single chapter by its slug
+export const singleChapterQuery = groq`*[_type == 'novel-gpt' && slug.current == $slug][0].chapters[slug.current == $parentSlug][0]
+`
+
+// Get all chapters slugs
+export const chapterssPathsQuery = groq`*[_type == 'novel' && defined(slug.current)][].chapters[].slug.current
+`
+
+////////////
 
 // Get all chapters
 export const chaptersQuery = groq`*[_type == "chapter" && defined(slug.current)]{

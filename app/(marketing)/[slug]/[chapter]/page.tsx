@@ -4,7 +4,7 @@ import { newNovels, oldNovels } from "@/config/data/novels";
 import { ReadingPage } from "@/components/novels/reading-page";
 
 import { SanityDocument } from "@sanity/client";
-import { chapterPathsQuery, chapterQuery } from "@/sanity/lib/queries";
+import { chapterssPathsQuery, singleChapterQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/sanityFetch";
 import { client } from "@/sanity/lib/client";
 
@@ -32,8 +32,8 @@ interface PageProps {
 // Prepare Next.js to know which routes already exist
 export async function generateStaticParams() {
   // Important, use the plain Sanity Client here
-  const chapters = await client.fetch(chapterPathsQuery);
-
+  const chapters = await client.fetch(chapterssPathsQuery);
+  console.log("all chapter paths -->", chapters);
   return chapters;
 }
 
@@ -58,8 +58,11 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: { params: any }) {
   const novel = await sanityFetch<SanityDocument>({
-    query: chapterQuery,
-    params,
+    query: singleChapterQuery,
+    params: {
+      slug: "history-strongest-senior-brother-chapter-1",
+      parentSlug: "history-strongest-senior-brother",
+    },
   });
 
   console.log("chapterPage", novel);
