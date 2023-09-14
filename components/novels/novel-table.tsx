@@ -1,4 +1,5 @@
 import { Novel, newNovels, oldNovels } from "@/config/data/novels";
+import Link from "next/link";
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
@@ -6,27 +7,18 @@ interface NovelTableProps extends React.HTMLAttributes<HTMLDivElement> {
   novel: Novel;
 }
 
-export default function NovelTable() {
+export default function NovelTable({ chapters, novelSlug }) {
   return (
     <Table>
       <TableBody>
-        {newNovels
-          ? newNovels.map((novel, i) => (
+        {chapters
+          ? chapters.map((ch, i) => (
               <TableRow key={`${i} + 1`}>
-                <TableCell className="font-medium">{novel.title}</TableCell>
-                <TableCell>{novel.chapter}</TableCell>
-                <TableCell>{novel.author}</TableCell>
-                <TableCell className="text-right">{novel.time}</TableCell>
-              </TableRow>
-            ))
-          : null}
-        {oldNovels
-          ? oldNovels.map((novel, i) => (
-              <TableRow key={`${i} + 1`}>
-                <TableCell className="font-medium">{novel.title}</TableCell>
-                <TableCell>{novel.chapter}</TableCell>
-                <TableCell>{novel.author}</TableCell>
-                <TableCell className="text-right">{novel.time}</TableCell>
+                <TableCell className="font-medium">
+                  <Link href={`${novelSlug}/${ch.fields.slug}`}>
+                    {ch.fields.title}
+                  </Link>
+                </TableCell>
               </TableRow>
             ))
           : null}

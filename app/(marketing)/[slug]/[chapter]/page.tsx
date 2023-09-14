@@ -3,42 +3,36 @@ import { notFound } from "next/navigation";
 import { newNovels, oldNovels } from "@/config/data/novels";
 import { ReadingPage } from "@/components/novels/reading-page";
 
+import { client } from "@/lib/contentful/client";
+
 interface PageProps {
   params: {
     chapter: string;
   };
 }
 
-export async function generateStaticParams(): Promise<PageProps["params"][]> {
-  const allNovels = [...newNovels, ...oldNovels];
+export async function generateStaticParams() {
+  const response = await client.getEntries({ content_type: "chapter" });
+  const chapterPaths = response.items.map((item) => ({
+    params: { slug: item.fields.slug },
+  }));
 
-  const params = allNovels.reduce((acc, novel) => {
-    return [
-      ...acc,
-      ...novel.chapters.map((chapter) => ({
-        chapter: chapter.href,
-      })),
-    ];
-  }, []);
-
-  return params;
+  return chapterPaths;
 }
 
-export default async function PagePage({
-  params,
-}: {
-  params: { chapter: string };
-}) {
-  const allNovels = [...newNovels, ...oldNovels];
+export default async function PagePage({ params }) {
+  const { slug, chapter } = params;
 
-  const chapter = allNovels
-    .map((novel) => novel.chapters)
-    .flat()
-    .find((n) => n.href === params.chapter);
+  const response = await client.getEntries({
+    content_type: "chapter",
+    "fields.slug": chapter,
+  });
 
-  if (!chapter) {
+  if (!response?.items?.length) {
     notFound();
   }
 
-  return <ReadingPage novel={chapter} />;
+  return <ReadingPage slug={slug} chapter={response?.items?.[0]} />;
 }
+
+// chapter-2-components-and-props

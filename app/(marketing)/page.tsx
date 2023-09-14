@@ -15,14 +15,14 @@ export default async function IndexPage() {
   return (
     <>
       <section className="container grid justify-center gap-6 py-2 md:py-12 lg:py-19">
-        <ContentFulSection bigTitle="ContentFul Data" novels={data.items} />
+        <ContentFulSection bigTitle="Most Recent Update" novels={data.items} />
         {/* <FeatureSection title="Popular This Week" novels={newNovels} />
         <FeatureSection title="New Releases" novels={oldNovels} />
         <FeatureSection title="Poplular genres" novels={newNovels} /> */}
-        <h2 className="text-3xl font-bold leading-[1.1] tracking-tighter sm:text-3xl md:text-5xl">
+        {/* <h2 className="text-3xl font-bold leading-[1.1] tracking-tighter sm:text-3xl md:text-5xl">
           Most Recent Update
-        </h2>
-        <NovelTable />
+        </h2> */}
+        {/* <NovelTable /> */}
       </section>
       <section className="container grid justify-center gap-6 py-8 md:py-12 lg:py-24">
         <div className="mx-auto flex flex-col gap-4 md:max-w-[52rem]">
