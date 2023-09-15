@@ -10,7 +10,7 @@ export default function FeatureSection({ title, novels }: FeatureSectionProps) {
   return (
     <section className="container grid justify-center gap-6 py-8 md:py-3 lg:py-6">
       <div className="flex flex-col gap-4 my-2">
-        <h2 className="text-3xl font-bold leading-[1.1] tracking-tighter sm:text-3xl md:text-6xl">
+        <h2 className="px-10 text-3xl font-bold leading-[1.1] tracking-tighter sm:text-3xl md:text-6xl">
           {title}
         </h2>
       </div>
@@ -34,7 +34,7 @@ export function ContentFulSection({ bigTitle, novels }) {
   return (
     <section className="container grid justify-center gap-6 py-8 md:py-3 lg:py-6">
       <div className="flex flex-col gap-4 my-2">
-        <h2 className="text-3xl font-bold leading-[1.1] tracking-tighter sm:text-3xl md:text-6xl">
+        <h2 className="px-7 text-3xl font-bold leading-[1.1] tracking-tighter sm:text-3xl md:text-6xl">
           {bigTitle}
         </h2>
       </div>

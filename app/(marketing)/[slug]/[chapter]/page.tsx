@@ -28,11 +28,22 @@ export default async function PagePage({ params }) {
     "fields.slug": chapter,
   });
 
+  const novelResponse = await client.getEntries({
+    content_type: "novel",
+    "fields.slug": slug,
+  });
+
   if (!response?.items?.length) {
     notFound();
   }
 
-  return <ReadingPage slug={slug} chapter={response?.items?.[0]} />;
+  return (
+    <ReadingPage
+      novel={novelResponse?.items}
+      slug={slug}
+      chapter={response?.items?.[0]}
+    />
+  );
 }
 
 // chapter-2-components-and-props

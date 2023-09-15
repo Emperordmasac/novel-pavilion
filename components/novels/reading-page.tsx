@@ -6,14 +6,17 @@ import { Chapter, Novel } from "@/config/data/novels";
 import { Icons } from "@/components/icons";
 import { RichText } from "../ui/rich-text";
 import { cn } from "@/lib/utils";
+import { Pager } from "../pager";
 
 interface NovelPageProps extends React.HTMLAttributes<HTMLDivElement> {
   novel: Chapter;
 }
 
-export function ReadingPage({ chapter, slug }) {
+export function ReadingPage({ chapter, slug, novel }) {
   const { title, content } = chapter.fields;
   const back = slug;
+
+  console.log("novels-->", novel.title);
 
   return (
     <article className="container relative max-w-3xl py-6 lg:py-10">
@@ -33,10 +36,11 @@ export function ReadingPage({ chapter, slug }) {
         </h1>
       </div>
       <hr className="mt-10 mb-5" />
-      <div className="prose">
+      <div className="prose dark:prose-invert">
         <RichText content={content} />
       </div>
-      <hr className="mt-12" />
+      <hr className="my-4 md:my-6" />
+      <Pager />
       <div className="flex justify-center py-6 lg:py-10">
         <Link
           href={`/${back}`}

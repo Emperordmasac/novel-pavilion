@@ -7,6 +7,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import NovelTable from "@/components/novels/novel-table";
+import { link } from "fs";
 
 interface NovelPageProps extends React.HTMLAttributes<HTMLDivElement> {
   novel?: Novel;
@@ -83,7 +84,7 @@ export function NovelPage({ novel }) {
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="chapters">Chapters</TabsTrigger>
           </TabsList>
-          <TabsContent value="about" className="mt-5 prose">
+          <TabsContent value="about" className="mt-5 prose dark:prose-invert">
             {synopsis}
           </TabsContent>
           <TabsContent value="chapters">
@@ -98,6 +99,7 @@ export function NovelPage({ novel }) {
           Back Home
         </Link>
       </div>
+      <hr className="mt-12" />
     </article>
   );
 }

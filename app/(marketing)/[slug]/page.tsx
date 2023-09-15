@@ -25,6 +25,8 @@ export default async function PagePage({ params }) {
     "fields.slug": slug,
   });
 
+  console.log("params-->", params);
+
   if (!response?.items?.length) {
     notFound();
   }
